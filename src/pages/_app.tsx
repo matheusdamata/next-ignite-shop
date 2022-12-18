@@ -9,9 +9,14 @@ import Link from 'next/link'
 
 import { Handbag } from 'phosphor-react'
 
+import { SideRightCart } from '../components/SideRightCart'
+import { useState } from 'react'
+
 globalStyles()
 
 export default function App({ Component, pageProps }: AppProps) {
+  const [isActiveCart, setIsActiveCart] = useState(false)
+
   return (
     <Container>
       <Header>
@@ -19,10 +24,12 @@ export default function App({ Component, pageProps }: AppProps) {
           <Image src={logoImg} alt="" />
         </Link>
 
-        <ButtonCart>
+        <ButtonCart onClick={() => setIsActiveCart(!isActiveCart)}>
           <Handbag size={24} weight="bold" />
         </ButtonCart>
       </Header>
+
+      <SideRightCart isActive={isActiveCart} />
       <Component {...pageProps} />
     </Container>
   )
