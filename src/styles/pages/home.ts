@@ -1,9 +1,9 @@
-import { styled } from ".."
+import { styled } from '..'
 
 export const HomeContainer = styled('main', {
   display: 'flex',
   width: '100%',
-  maxWidth:  'calc(100vw - ((100vw - 1180px) / 2))',
+  maxWidth: 'calc(100vw - ((100vw - 1180px) / 2))',
   marginLeft: 'auto',
   minHeight: 656,
 })
@@ -16,7 +16,7 @@ export const Product = styled('div', {
   position: 'relative',
   overflow: 'hidden',
   minWidth: 540,
-  
+
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'center',
@@ -60,7 +60,35 @@ export const Product = styled('div', {
     footer: {
       transform: 'translateY(0%)',
       opacity: 1,
-    }
-  }
+    },
+  },
+})
 
+export const FooterProductDetails = styled('div', {
+  display: 'flex',
+  flexDirection: 'column',
+
+  gap: '4px',
+})
+
+export const ButtonCart = styled('button', {
+  width: '3.5rem',
+  height: '3.5rem',
+
+  border: 0,
+  borderRadius: '6px',
+  background: '$green500',
+
+  svg: {
+    color: '$white',
+  },
+
+  '&:hover': {
+    transition: 'all 0.2s ease',
+    opacity: 0.8,
+
+    svg: {
+      color: '$green300',
+    },
+  },
 })

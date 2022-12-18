@@ -1,15 +1,15 @@
-import type { AppProps } from "next/app";
-import Image from "next/image";
+import type { AppProps } from 'next/app'
+import Image from 'next/image'
 
-import { globalStyles } from "../styles/global";
+import { globalStyles } from '../styles/global'
 
-import logoImg from "../assets/logo.svg";
-import { Container, Header, ButtonCart } from "../styles/pages/app";
-import Link from "next/link";
+import logoImg from '../assets/logo.svg'
+import { Container, Header, ButtonCart } from '../styles/pages/app'
+import Link from 'next/link'
 
-import { Handbag } from "phosphor-react";
+import { Handbag } from 'phosphor-react'
 
-globalStyles();
+globalStyles()
 
 export default function App({ Component, pageProps }: AppProps) {
   return (
@@ -25,5 +25,5 @@ export default function App({ Component, pageProps }: AppProps) {
       </Header>
       <Component {...pageProps} />
     </Container>
-  );
+  )
 }

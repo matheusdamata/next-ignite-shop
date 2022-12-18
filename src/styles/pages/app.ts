@@ -1,4 +1,4 @@
-import { styled } from "..";
+import { styled } from '..'
 
 export const Container = styled('div', {
   display: 'flex',
@@ -16,7 +16,6 @@ export const Header = styled('header', {
   display: 'flex',
   justifyContent: 'space-between',
 })
-
 
 export const ButtonCart = styled('button', {
   width: '3rem',
@@ -36,6 +35,6 @@ export const ButtonCart = styled('button', {
 
     svg: {
       color: '$green300',
-    }
-  }
+    },
+  },
 })
