@@ -100,7 +100,13 @@ export const Content = styled('div', {
 
 export const ProductList = styled('div', {
   display: 'flex',
+  flexDirection: 'column',
   flex: 1,
+})
+
+export const ProductListItem = styled('div', {
+  display: 'flex',
+  flexDirection: 'row',
 })
 
 export const CartInfoTop = styled('div', {

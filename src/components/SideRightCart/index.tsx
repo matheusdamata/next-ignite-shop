@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import { X } from 'phosphor-react'
 import {
   CartInfoBottom,
@@ -7,13 +7,18 @@ import {
   Content,
   Header,
   ProductList,
+  ProductListItem,
 } from '../../styles/components/siderightcart'
+import { Context } from '../../context/Context'
+import Image from 'next/image'
 
 interface SideRightCartProps {
   isActive: boolean
 }
 
 export function SideRightCart({ isActive }: SideRightCartProps) {
+  const { carts } = useContext(Context)
+
   const [active, setActive] = useState(false)
 
   useEffect(() => {
@@ -33,7 +38,13 @@ export function SideRightCart({ isActive }: SideRightCartProps) {
           <Content>
             <h1>Sacola de compras</h1>
 
-            <ProductList>A</ProductList>
+            <ProductList>
+              {carts.map((cart) => (
+                <ProductListItem key={cart.id}>
+                  <Image src={cart.imageUrl} alt="" width={95} height={95} />
+                </ProductListItem>
+              ))}
+            </ProductList>
 
             <footer>
               <CartInfoTop>

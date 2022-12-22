@@ -2,11 +2,13 @@ import axios from 'axios'
 import { GetStaticPaths, GetStaticProps } from 'next'
 import Head from 'next/head'
 import Image from 'next/image'
-import { useRouter } from 'next/router'
-import { useState } from 'react'
+import { useContext, useState } from 'react'
 import Stripe from 'stripe'
+import { Context } from '../../context/Context'
 import { stripe } from '../../lib/stripe'
 import {
+  Button,
+  ButtonsContainer,
   ImageContainer,
   ProductContainer,
   ProductDetails,
@@ -24,6 +26,8 @@ interface ProductProps {
 }
 
 export default function Product({ product }: ProductProps) {
+  const { dispatch } = useContext(Context)
+
   const [isCreatingCheckoutSession, setIsCreatingCheckoutSession] =
     useState(false)
 
@@ -47,6 +51,20 @@ export default function Product({ product }: ProductProps) {
     }
   }
 
+  function handleAddCart() {
+    dispatch({
+      type: 'ADD_TO_CART',
+      payload: {
+        id: product.id,
+        name: product.name,
+        imageUrl: product.imageUrl,
+        price: product.price,
+        description: product.description,
+        defaultPriceId: product.defaultPriceId,
+      },
+    })
+  }
+
   return (
     <>
       <Head>
@@ -64,12 +82,22 @@ export default function Product({ product }: ProductProps) {
 
           <p>{product.description}</p>
 
-          <button
-            disabled={isCreatingCheckoutSession}
-            onClick={handleBuyProduct}
-          >
-            Comprar agora
-          </button>
+          <ButtonsContainer>
+            <Button
+              disabled={isCreatingCheckoutSession}
+              onClick={handleBuyProduct}
+              bgColor="light"
+            >
+              Comprar agora
+            </Button>
+            <Button
+              disabled={isCreatingCheckoutSession}
+              onClick={handleAddCart}
+              bgColor="dark"
+            >
+              Adicionar ao carrinho
+            </Button>
+          </ButtonsContainer>
         </ProductDetails>
       </ProductContainer>
     </>
