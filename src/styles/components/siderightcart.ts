@@ -102,11 +102,67 @@ export const ProductList = styled('div', {
   display: 'flex',
   flexDirection: 'column',
   flex: 1,
+  gap: '1rem',
 })
 
 export const ProductListItem = styled('div', {
   display: 'flex',
   flexDirection: 'row',
+  gap: '1rem',
+})
+
+export const ProductListItemImage = styled('div', {
+  width: '100%',
+  maxWidth: 102,
+  height: 93,
+  background: 'linear-gradient(180deg, #1ea483 0%, #7465d4 100%)',
+  borderRadius: 8,
+  padding: '0.25rem',
+
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'center',
+
+  img: {
+    width: '100%',
+    height: '100%',
+    objectFit: 'cover',
+  },
+})
+
+export const ProductListInfoContainer = styled('div', {
+  display: 'flex',
+  flexDirection: 'column',
+  justifyContent: 'space-between',
+
+  button: {
+    width: '4.0625rem',
+
+    fontSize: '1rem',
+    textAlign: 'left',
+    fontWeight: 'bold',
+    color: '$green500',
+
+    border: 0,
+
+    background: 'transparent',
+  },
+})
+
+export const ProductListInfo = styled('div', {
+  display: 'flex',
+  flexDirection: 'column',
+
+  gap: '0.5rem',
+})
+
+export const ProductListInfoTitle = styled('span', {
+  fontSize: '$md',
+})
+
+export const ProductListInfoPrice = styled('strong', {
+  fontSize: '$md',
+  fontWeight: 'bold',
 })
 
 export const CartInfoTop = styled('div', {
