@@ -3,6 +3,7 @@ import { CartProps, userReducer } from '../reducer/userReducer'
 
 type ContextType = {
   carts: CartProps[]
+  openCart: boolean
   dispatch: React.Dispatch<any>
 }
 
@@ -15,11 +16,14 @@ export const Context = createContext({} as ContextType)
 export const ContextProvider = ({ children }: ContextProviderType) => {
   const [userState, dispatch] = useReducer(userReducer, {
     carts: [],
+    openCart: false,
   })
 
-  const { carts } = userState
+  const { carts, openCart } = userState
 
   return (
-    <Context.Provider value={{ carts, dispatch }}>{children}</Context.Provider>
+    <Context.Provider value={{ carts, openCart, dispatch }}>
+      {children}
+    </Context.Provider>
   )
 }

@@ -4,6 +4,7 @@ import Head from 'next/head'
 import Image from 'next/image'
 import { useContext, useState } from 'react'
 import Stripe from 'stripe'
+import { ProductProps } from '../../@types/global'
 import { Context } from '../../context/Context'
 import { stripe } from '../../lib/stripe'
 import {
@@ -13,17 +14,6 @@ import {
   ProductContainer,
   ProductDetails,
 } from '../../styles/pages/products'
-
-interface ProductProps {
-  product: {
-    id: string
-    name: string
-    imageUrl: string
-    price: string
-    description: string
-    defaultPriceId: string
-  }
-}
 
 export default function Product({ product }: ProductProps) {
   const { dispatch } = useContext(Context)
@@ -61,6 +51,7 @@ export default function Product({ product }: ProductProps) {
         price: product.price,
         description: product.description,
         defaultPriceId: product.defaultPriceId,
+        quantity: 1,
       },
     })
   }
@@ -86,14 +77,15 @@ export default function Product({ product }: ProductProps) {
             <Button
               disabled={isCreatingCheckoutSession}
               onClick={handleBuyProduct}
-              bgColor="light"
+              bgColor="dark"
             >
               Comprar agora
             </Button>
+
             <Button
               disabled={isCreatingCheckoutSession}
               onClick={handleAddCart}
-              bgColor="dark"
+              bgColor="transparent"
             >
               Adicionar ao carrinho
             </Button>

@@ -7,14 +7,21 @@ export type CartProps = {
   price: string
   description: string
   defaultPriceId: string
+  quantity: number
 }
 
 export type UserType = {
   carts: CartProps[]
+  openCart: boolean
 }
 
 export const userReducer = (state: UserType, action: any) => {
   switch (action.type) {
+    case 'SHOW_CART': {
+      return produce(state, (draft) => {
+        draft.openCart = !action.payload
+      })
+    }
     case 'ADD_TO_CART': {
       const currentProductIndex = state.carts.findIndex((cart) => {
         return cart.id === action.payload.id

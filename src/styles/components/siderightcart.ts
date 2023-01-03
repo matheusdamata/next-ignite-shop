@@ -165,6 +165,18 @@ export const ProductListInfoPrice = styled('strong', {
   fontWeight: 'bold',
 })
 
+export const CartEmpty = styled('div', {
+  height: '100%',
+
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'center',
+
+  h2: {
+    color: '$gray500',
+  },
+})
+
 export const CartInfoTop = styled('div', {
   display: 'flex',
   flexDirection: 'row',

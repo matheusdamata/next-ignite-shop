@@ -16,23 +16,34 @@ import {
 import 'keen-slider/keen-slider.min.css'
 import Stripe from 'stripe'
 import { Handbag } from 'phosphor-react'
-
-interface HomeProps {
-  products: {
-    id: string
-    name: string
-    imageUrl: string
-    price: string
-  }[]
-}
+import { useContext } from 'react'
+import { Context } from '../context/Context'
+import { HomeProps, ProductType } from '../@types/global'
 
 export default function Home({ products }: HomeProps) {
+  const { dispatch } = useContext(Context)
+
   const [sliderRef] = useKeenSlider({
     slides: {
       perView: 3,
       spacing: 48,
     },
   })
+
+  function handleAddCart(product: ProductType) {
+    dispatch({
+      type: 'ADD_TO_CART',
+      payload: {
+        id: product.id,
+        name: product.name,
+        imageUrl: product.imageUrl,
+        price: product.price,
+        description: product.description,
+        defaultPriceId: product.defaultPriceId,
+        quantity: 1,
+      },
+    })
+  }
 
   return (
     <>
@@ -43,28 +54,24 @@ export default function Home({ products }: HomeProps) {
       <HomeContainer ref={sliderRef} className="keen-slider">
         {products.map((product) => {
           return (
-            <Link
-              href={`/product/${product.id}`}
-              key={product.id}
-              prefetch={false}
-            >
-              <Product className="keen-slider__slide">
+            <Product className="keen-slider__slide" key={product.id}>
+              <Link href={`/product/${product.id}`} prefetch={false}>
                 <Image src={product.imageUrl} width={520} height={480} alt="" />
+              </Link>
 
-                <footer>
-                  <FooterProductDetails>
-                    <strong>{product.name}</strong>
-                    <span>{product.price}</span>
-                  </FooterProductDetails>
+              <footer>
+                <FooterProductDetails>
+                  <strong>{product.name}</strong>
+                  <span>{product.price}</span>
+                </FooterProductDetails>
 
-                  <div>
-                    <ButtonCart>
-                      <Handbag size={32} weight="bold" />
-                    </ButtonCart>
-                  </div>
-                </footer>
-              </Product>
-            </Link>
+                <div>
+                  <ButtonCart onClick={() => handleAddCart(product)}>
+                    <Handbag size={32} weight="bold" />
+                  </ButtonCart>
+                </div>
+              </footer>
+            </Product>
           )
         })}
       </HomeContainer>
@@ -88,6 +95,8 @@ export const getStaticProps: GetStaticProps = async () => {
         style: 'currency',
         currency: 'BRL',
       }).format(price.unit_amount! / 100),
+      description: product.description,
+      defaultPriceId: price.id,
     }
   })
 

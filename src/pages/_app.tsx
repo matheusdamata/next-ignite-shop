@@ -4,20 +4,16 @@ import Image from 'next/image'
 import { globalStyles } from '../styles/global'
 
 import logoImg from '../assets/logo.svg'
-import { Container, Header, ButtonCart } from '../styles/pages/app'
+import { Container, Header } from '../styles/pages/app'
 import Link from 'next/link'
 
-import { Handbag } from 'phosphor-react'
-
 import { SideRightCart } from '../components/SideRightCart'
-import { useState } from 'react'
 import { ContextProvider } from '../context/Context'
+import { Cart } from '../components/Cart'
 
 globalStyles()
 
 export default function App({ Component, pageProps }: AppProps) {
-  const [isActiveCart, setIsActiveCart] = useState(false)
-
   return (
     <ContextProvider>
       <Container>
@@ -26,12 +22,10 @@ export default function App({ Component, pageProps }: AppProps) {
             <Image src={logoImg} alt="" />
           </Link>
 
-          <ButtonCart onClick={() => setIsActiveCart(!isActiveCart)}>
-            <Handbag size={24} weight="bold" />
-          </ButtonCart>
+          <Cart />
         </Header>
 
-        <SideRightCart isActive={isActiveCart} />
+        <SideRightCart />
         <Component {...pageProps} />
       </Container>
     </ContextProvider>

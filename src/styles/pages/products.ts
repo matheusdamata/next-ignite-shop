@@ -83,11 +83,12 @@ export const Button = styled('button', {
           backgroundColor: '$green300',
         },
       },
-      light: {
-        backgroundColor: '$green300',
+      transparent: {
+        color: '$green300',
+        backgroundColor: 'transparent',
 
         '&:not(:disabled):hover': {
-          backgroundColor: '$green500',
+          color: '$green500',
         },
       },
     },
