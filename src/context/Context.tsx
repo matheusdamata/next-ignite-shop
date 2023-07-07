@@ -1,4 +1,4 @@
-import React, { createContext, ReactNode, useReducer } from 'react'
+import React, { createContext, ReactNode, useEffect, useReducer } from 'react'
 import { CartProps, userReducer } from '../reducer/userReducer'
 
 type ContextType = {
@@ -19,7 +19,26 @@ export const ContextProvider = ({ children }: ContextProviderType) => {
     openCart: false,
   })
 
+  useEffect(() => {
+    const storedStateAsJSON = localStorage.getItem(
+      '@ignite-shop:ignite-shop-state-1.0.0',
+    )
+
+    if (storedStateAsJSON) {
+      dispatch({
+        type: 'INIT_STORED',
+        payload: JSON.parse(storedStateAsJSON),
+      })
+    }
+  }, [])
+
   const { carts, openCart } = userState
+
+  useEffect(() => {
+    const stateJSON = JSON.stringify(userState)
+
+    localStorage.setItem('@ignite-shop:ignite-shop-state-1.0.0', stateJSON)
+  }, [userState])
 
   return (
     <Context.Provider value={{ carts, openCart, dispatch }}>

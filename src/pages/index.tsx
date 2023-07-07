@@ -1,3 +1,4 @@
+import { useContext } from 'react'
 import { GetStaticProps } from 'next'
 import Head from 'next/head'
 import Image from 'next/image'
@@ -6,6 +7,7 @@ import Link from 'next/link'
 import { useKeenSlider } from 'keen-slider/react'
 
 import { stripe } from '../lib/stripe'
+
 import {
   ButtonCart,
   FooterProductDetails,
@@ -14,9 +16,9 @@ import {
 } from '../styles/pages/home'
 
 import 'keen-slider/keen-slider.min.css'
+
 import Stripe from 'stripe'
 import { Handbag } from 'phosphor-react'
-import { useContext } from 'react'
 import { Context } from '../context/Context'
 import { HomeProps, ProductType } from '../@types/global'
 

@@ -17,6 +17,12 @@ export type UserType = {
 
 export const userReducer = (state: UserType, action: any) => {
   switch (action.type) {
+    case 'INIT_STORED': {
+      return produce(state, (draft) => {
+        draft.carts = action.payload.carts
+        draft.openCart = action.payload.openCart
+      })
+    }
     case 'SHOW_CART': {
       return produce(state, (draft) => {
         draft.openCart = !action.payload
